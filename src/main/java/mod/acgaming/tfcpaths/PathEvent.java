@@ -44,11 +44,14 @@ public class PathEvent
                     if (random < PathConfig.PlayerSettings.GRASS_TO_DIRT)
                     {
                         world.setBlockState(posEntity, BlockRockVariant.get(blockRock.getRock(), Rock.Type.DIRT).getDefaultState());
-                        BlockPos upPos = posEntity.up();
-                        Material upMaterial = world.getBlockState(upPos).getMaterial();
-                        if (upMaterial == Material.PLANTS || upMaterial == Material.VINE || world.getBlockState(upPos).getBlock() instanceof BlockPlacedItemFlat)
+                        if (PathConfig.GeneralSettings.DESTROY_VEGETATION)
                         {
-                            world.destroyBlock(upPos, false);
+                            BlockPos upPos = posEntity.up();
+                            Material upMaterial = world.getBlockState(upPos).getMaterial();
+                            if (upMaterial == Material.PLANTS || upMaterial == Material.VINE || world.getBlockState(upPos).getBlock() instanceof BlockPlacedItemFlat)
+                            {
+                                world.destroyBlock(upPos, true);
+                            }
                         }
                         return;
                     }
@@ -76,7 +79,7 @@ public class PathEvent
 
         if (PathConfig.GeneralSettings.ALL_ENTITIES)
         {
-            if (event.getEntity() != null & !(event.getEntity() instanceof EntityPlayer))
+            if (event.getEntity() != null && !(event.getEntity() instanceof EntityPlayer))
             {
                 EntityLivingBase entity = event.getEntityLiving();
                 int posX = MathHelper.floor(entity.posX);
@@ -104,11 +107,14 @@ public class PathEvent
                         if (random < PathConfig.MobSettings.GRASS_TO_DIRT)
                         {
                             world.setBlockState(posEntity, BlockRockVariant.get(blockRock.getRock(), Rock.Type.DIRT).getDefaultState());
-                            BlockPos upPos = posEntity.up();
-                            Material upMaterial = world.getBlockState(upPos).getMaterial();
-                            if (upMaterial == Material.PLANTS || upMaterial == Material.VINE || world.getBlockState(upPos).getBlock() instanceof BlockPlacedItemFlat)
+                            if (PathConfig.GeneralSettings.DESTROY_VEGETATION)
                             {
-                                world.destroyBlock(upPos, false);
+                                BlockPos upPos = posEntity.up();
+                                Material upMaterial = world.getBlockState(upPos).getMaterial();
+                                if (upMaterial == Material.PLANTS || upMaterial == Material.VINE || world.getBlockState(upPos).getBlock() instanceof BlockPlacedItemFlat)
+                                {
+                                    world.destroyBlock(upPos, true);
+                                }
                             }
                             return;
                         }

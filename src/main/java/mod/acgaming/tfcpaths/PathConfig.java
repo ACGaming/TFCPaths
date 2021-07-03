@@ -15,13 +15,17 @@ public class PathConfig
 
     public static class GeneralSettings
     {
-        @Config.Name("Debug Mode")
-        @Config.Comment("When enabled, prints debug values to console")
-        public static boolean DEBUG = false;
+        @Config.Name("Destroy Vegetation")
+        @Config.Comment("When enabled, vegetation like tall grass or loose rocks gets destroyed")
+        public static boolean DESTROY_VEGETATION = true;
 
         @Config.Name("All Entities")
         @Config.Comment("When enabled, all entities create paths (performance intensive)")
         public static boolean ALL_ENTITIES = false;
+
+        @Config.Name("Debug Mode")
+        @Config.Comment("When enabled, prints debug values to console")
+        public static boolean DEBUG = false;
     }
 
     public static class PlayerSettings
