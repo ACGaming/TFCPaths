@@ -3,7 +3,6 @@ package mod.acgaming.tfcpaths;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -18,24 +17,24 @@ import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 @EventBusSubscriber
 public class PathEvent
 {
-    private static BlockPos posPlayerOld = new BlockPos(0, 0, 0);
+    private static BlockPos posEntityOld = new BlockPos(0, 0, 0);
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void createPath(LivingEvent.LivingUpdateEvent event)
     {
-        if (event.getEntity() != null && event.getEntity() instanceof EntityPlayer)
+        if (event.getEntity() != null)
         {
-            Entity player = event.getEntity();
-            BlockPos posPlayer = new BlockPos(player.posX, player.posY + player.getYOffset(), player.posZ);
-            World world = player.getEntityWorld();
-            IBlockState state = world.getBlockState(posPlayer);
+            Entity entity = event.getEntity();
+            BlockPos posEntity = new BlockPos(entity.posX, entity.posY + entity.getYOffset(), entity.posZ);
+            World world = entity.getEntityWorld();
+            IBlockState state = world.getBlockState(posEntity);
 
             double random = Math.random() * 1000.0D + 1.0D;
 
             if (PathConfig.DEBUG)
                 System.out.println(random);
 
-            if (!world.isRemote && !posPlayerOld.equals(posPlayer) && state.getBlock() instanceof BlockRockVariant && (Math.abs(player.motionX) > 0.0D || Math.abs(player.motionY) > 0.0D || Math.abs(player.motionZ) > 0.0D))
+            if (!world.isRemote && !posEntityOld.equals(posEntity) && state.getBlock() instanceof BlockRockVariant && (Math.abs(entity.motionX) > 0.0D || Math.abs(entity.motionY) > 0.0D || Math.abs(entity.motionZ) > 0.0D))
             {
                 BlockRockVariant blockRock = (BlockRockVariant) state.getBlock();
 
@@ -43,14 +42,14 @@ public class PathEvent
                 {
                     if (random < PathConfig.GRASS_TO_DIRT)
                     {
-                        world.setBlockState(posPlayer, BlockRockVariant.get(blockRock.getRock(), Rock.Type.DIRT).getDefaultState());
-                        BlockPos upPos = posPlayer.up();
+                        world.setBlockState(posEntity, BlockRockVariant.get(blockRock.getRock(), Rock.Type.DIRT).getDefaultState());
+                        BlockPos upPos = posEntity.up();
                         Material upMaterial = world.getBlockState(upPos).getMaterial();
                         if (upMaterial == Material.PLANTS || upMaterial == Material.VINE || world.getBlockState(upPos).getBlock() instanceof BlockPlacedItemFlat)
                         {
                             world.destroyBlock(upPos, false);
                         }
-                        posPlayerOld = posPlayer;
+                        posEntityOld = posEntity;
                         return;
                     }
                 }
@@ -59,8 +58,8 @@ public class PathEvent
                 {
                     if (random < PathConfig.DIRT_TO_PATH)
                     {
-                        world.setBlockState(posPlayer, BlockRockVariant.get(blockRock.getRock(), Rock.Type.PATH).getDefaultState());
-                        posPlayerOld = posPlayer;
+                        world.setBlockState(posEntity, BlockRockVariant.get(blockRock.getRock(), Rock.Type.PATH).getDefaultState());
+                        posEntityOld = posEntity;
                         return;
                     }
                 }
@@ -69,8 +68,8 @@ public class PathEvent
                 {
                     if (random < PathConfig.PATH_TO_GRAVEL)
                     {
-                        world.setBlockState(posPlayer, BlockRockVariant.get(blockRock.getRock(), Rock.Type.GRAVEL).getDefaultState());
-                        posPlayerOld = posPlayer;
+                        world.setBlockState(posEntity, BlockRockVariant.get(blockRock.getRock(), Rock.Type.GRAVEL).getDefaultState());
+                        posEntityOld = posEntity;
                         return;
                     }
                 }
