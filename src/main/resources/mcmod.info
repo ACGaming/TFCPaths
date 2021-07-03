@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "tfcpaths",
+    "name": "TFCPaths",
+    "description": "Go ahead, path my way!",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "ACGaming"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
