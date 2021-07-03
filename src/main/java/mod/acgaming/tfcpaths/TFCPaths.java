@@ -2,7 +2,11 @@ package mod.acgaming.tfcpaths;
 
 import net.minecraftforge.fml.common.Mod;
 
-@Mod(modid = "tfcpaths", version = "1.0", name = "TFC Paths", acceptedMinecraftVersions = "[1.12.2]")
+@Mod(modid = "tfcpaths",
+    version = "1.0",
+    name = "TFC Paths",
+    acceptedMinecraftVersions = "[1.12.2]",
+    dependencies = "required-after:tfc")
 public class TFCPaths
 {
     public static final String MODID = "tfcpaths";
