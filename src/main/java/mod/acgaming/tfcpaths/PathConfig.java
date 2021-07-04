@@ -38,17 +38,17 @@ public class PathConfig
         @Config.Name("Grass -> Dirt")
         @Config.Comment("Chance per mille for grass to turn into dirt, set to 0.0 to disable")
         @Config.RangeDouble(min = 0.0, max = 1000.0)
-        public double GRASS_TO_DIRT = 15.0;
+        public double GRASS_TO_DIRT = 30.0;
 
         @Config.Name("Dirt -> Path")
         @Config.Comment("Chance per mille for dirt to turn into a path, set to 0.0 to disable")
         @Config.RangeDouble(min = 0.0, max = 1000.0)
-        public double DIRT_TO_PATH = 5.0;
+        public double DIRT_TO_PATH = 10.0;
 
         @Config.Name("Path -> Gravel")
         @Config.Comment("Chance per mille for a path to turn into gravel, set to 0.0 to disable")
         @Config.RangeDouble(min = 0.0, max = 1000.0)
-        public double PATH_TO_GRAVEL = 1.0;
+        public double PATH_TO_GRAVEL = 2.0;
     }
 
     public static class MobSettings
