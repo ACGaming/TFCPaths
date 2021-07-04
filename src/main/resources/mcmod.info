@@ -1,7 +1,7 @@
 [
   {
     "modid": "tfcpaths",
-    "name": "TFCPaths",
+    "name": "TFC Paths",
     "description": "Go ahead, path my way!",
     "version": "${version}",
     "mcversion": "${mcversion}",

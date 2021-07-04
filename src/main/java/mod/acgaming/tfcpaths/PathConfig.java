@@ -9,23 +9,28 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Config(modid = TFCPaths.MODID, name = "TFCPaths")
 public class PathConfig
 {
+    @Config.Comment("General Settings")
     public static GeneralSettings general_settings = new GeneralSettings();
+
+    @Config.Comment("Player Settings")
     public static PlayerSettings player_settings = new PlayerSettings();
+
+    @Config.Comment("Mob Settings")
     public static MobSettings mob_settings = new MobSettings();
 
     public static class GeneralSettings
     {
         @Config.Name("Destroy Vegetation")
         @Config.Comment("When enabled, vegetation like tall grass or loose rocks gets destroyed")
-        public static boolean DESTROY_VEGETATION = true;
+        public boolean DESTROY_VEGETATION = true;
 
         @Config.Name("All Entities")
         @Config.Comment("When enabled, all entities create paths (performance intensive)")
-        public static boolean ALL_ENTITIES = false;
+        public boolean ALL_ENTITIES = false;
 
         @Config.Name("Debug Mode")
         @Config.Comment("When enabled, prints debug values to console")
-        public static boolean DEBUG = false;
+        public boolean DEBUG = false;
     }
 
     public static class PlayerSettings
@@ -33,17 +38,17 @@ public class PathConfig
         @Config.Name("Grass -> Dirt")
         @Config.Comment("Chance per mille for grass to turn into dirt, set to 0.0 to disable")
         @Config.RangeDouble(min = 0.0, max = 1000.0)
-        public static double GRASS_TO_DIRT = 30.0;
+        public double GRASS_TO_DIRT = 15.0;
 
         @Config.Name("Dirt -> Path")
         @Config.Comment("Chance per mille for dirt to turn into a path, set to 0.0 to disable")
         @Config.RangeDouble(min = 0.0, max = 1000.0)
-        public static double DIRT_TO_PATH = 20.0;
+        public double DIRT_TO_PATH = 5.0;
 
         @Config.Name("Path -> Gravel")
         @Config.Comment("Chance per mille for a path to turn into gravel, set to 0.0 to disable")
         @Config.RangeDouble(min = 0.0, max = 1000.0)
-        public static double PATH_TO_GRAVEL = 2.0;
+        public double PATH_TO_GRAVEL = 1.0;
     }
 
     public static class MobSettings
@@ -51,21 +56,21 @@ public class PathConfig
         @Config.Name("Grass -> Dirt")
         @Config.Comment("Chance per mille for grass to turn into dirt, set to 0.0 to disable")
         @Config.RangeDouble(min = 0.0, max = 1000.0)
-        public static double GRASS_TO_DIRT = 15.0;
+        public double GRASS_TO_DIRT = 15.0;
 
         @Config.Name("Dirt -> Path")
         @Config.Comment("Chance per mille for dirt to turn into a path, set to 0.0 to disable")
         @Config.RangeDouble(min = 0.0, max = 1000.0)
-        public static double DIRT_TO_PATH = 10.0;
+        public double DIRT_TO_PATH = 5.0;
 
         @Config.Name("Path -> Gravel")
         @Config.Comment("Chance per mille for a path to turn into gravel, set to 0.0 to disable")
         @Config.RangeDouble(min = 0.0, max = 1000.0)
-        public static double PATH_TO_GRAVEL = 1.0;
+        public double PATH_TO_GRAVEL = 1.0;
     }
 
     @Mod.EventBusSubscriber(modid = TFCPaths.MODID)
-    private static class EventHandler
+    public static class EventHandler
     {
         @SubscribeEvent
         public static void onConfigChanged(final ConfigChangedEvent.OnConfigChangedEvent event)
